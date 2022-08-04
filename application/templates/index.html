@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+  <h1>Welcome To Manage My Coop Website</h1>
+</div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Date</th>
+        <th scope="col">Collected by</th>
+        <th scope="col">Num of eggs</th>
+        <th scope="col">Num of broken eggs</th>
+        <th scope="col">Current food</th>
+        <th scope="col">Num of dead chickens</th>
+        <th scope="col">update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in egg_posts.items %}
+        <tr>
+          <td>{{ post.id }}</td>
+          <td>{{ post.date.strftime('%d-%m-%Y') }}</td>
+          <td>{{ post.collector.username }}</td>
+          <td>{{ post.eggs_amount }}</td>
+          <td>{{ post.broken_eggs }}</td>
+          <td>{{ post.current_food }}</td>
+          <td>{{ post.dead_chicken }}</td>
+          <td>{% if post.collector == current_user %} <a href="{{url_for('egg_posts.update', egg_post_id = post.id)}}">Update</a>{% endif %}</td>
+          <td>{% if post.collector == current_user %} <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#del_post">Delete</button>{% endif %}</td>
+        </tr>
+        {% if post.collector == current_user %}
+        <div class="modal" tabindex="-1" role="dialog" id="del_post">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Delete Post Pop up Modal</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Are you sure you want to delete this blog post?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+                <form action="{{ url_for('egg_posts.delete_post', egg_post_id=post.id) }}" method="POST">
+                  <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </tbody>
+</table>
+</nav>
+{% endblock %}

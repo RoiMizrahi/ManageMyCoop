@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="cform-floating mb-3">
+  <div class="row">
+    <div class="col-12">
+      <div class="enter-div" align="center">
+          <h1><small class="text-muted">Welcome to</small> Manage My Coop {{current_user.username}}</h1>
+
+      </div>
+      <div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Our Technology</h5>
+        <p class="card-text">Our technology includes algorithms that work through business intelligence.</p>
+        <p>The system is simple to implement and use and includes an intuitive report display.</p>
+        <p>The system is easy to operate and suitable for all ages</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Easy to use</h5>
+        <p class="card-text">The system's easy-to-use technology allows farmers to manage every aspect of their chicken coop.</p>
+        <p>The system gives the farmer the ability to make informed decisions</p>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="d-flex position-relative">
+  <img src="{{ url_for('static', filename='images/ceo.png') }}" class="flex-shrink-0 me-3" height="200" width="200" >
+  <div>
+    <h5 class="mt-0">Mizrahi Roi <small class="text-muted">CEO</small></h5>
+    <p></p>
+    <p>Not only has ManageMyCoop's technology created significant savings in production costs,
+       it also improves coop performance and productivity.
+      It's a must-have product for every coop in the industry.</p>
+  </div>
+</div>
+<br>
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{ url_for('static', filename='images/1.png') }}" class="d-block w-100" height="auto">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/2.png') }}" class="d-block w-100">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ url_for('static', filename='images/3.png') }}" class="d-block w-100">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{% if current_user.is_authenticated %}
+
+{% else %}
+
+<div class="card" style="width: 60rem;">
+  <div class="card-body">
+    <h5 class="card-title">Leave your contact details now and a member of our team will contact you as soon as possible</h5>
+  <form class="row g-3">
+    <div class="col-md-6">
+      <label for="inputEmail4" class="form-label">Email</label>
+      <input type="email" class="form-control" id="inputEmail4" placeholder="name@company.com">
+    </div>
+    <div class="col-md-6">
+      <label for="inputPassword4" class="form-label">Phone Number</label>
+      <input type="text" class="form-control" id="inputPhoneNumber4" placeholder="+972-5123456789">
+    </div>
+    <div class="col-12">
+      <label for="inputAddress" class="form-label">Address</label>
+      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+    </div>
+    <div class="col-12">
+      <label for="inputAddress2" class="form-label">Address 2</label>
+      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+    </div>
+    <div class="col-md-6">
+      <label for="inputCity" class="form-label">City</label>
+      <input type="text" class="form-control" id="inputCity">
+    </div>
+    <div class="col-md-4">
+      <label for="inputState" class="form-label">State</label>
+      <select id="inputState" class="form-select">
+        <option selected>Choose...</option>
+        <option>Israel</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label for="inputZip" class="form-label">Zip</label>
+      <input type="text" class="form-control" id="inputZip">
+    </div>
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck">
+        <label class="form-check-label" for="gridCheck">
+          I'm not a robot
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

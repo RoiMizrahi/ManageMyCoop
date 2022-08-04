@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="width: 40rem;">
+  <div class="card-body">
+        <div class="signup-heading" align="center">
+          <h1 class="font-weight-normal">Prediction Page</h1>
+          <h3>Predict amount of eggs</h3>
+        </div>
+        <br>
+        <h3> Enter the following values:</h3>
+          <form method="POST" action= "" enctype="multipart/form-data">
+            <div class="form-group">
+            Age: <input class="form-control" type="number" name="age", placeholder="Enter age of chickens" required/>
+            </div>
+            <div class="form-group">
+            Food amount: <input class="form-control" type="number" name="food_consumed", placeholder="Enter amount of food consumed" required/>
+            </div>
+            <div class="form-group">
+            Number of Chickens: <input class="form-control" type="number" name="num_of_chickiens", placeholder="Enter amount of chickens" required/>
+            </div>
+            <div class="form-group">
+            Number of Dead Chickens: <input class="form-control" type="number" name="dead", placeholder="Enter amount of dead chickens" required/>
+            </div>
+            <div class="form-group">
+              <button class = 'btn btn-primary' value="Submit">Predict</button>
+            </div>
+            </form>
+            <p style="text-align: center;">{{ output }}</p>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron">
+  <div align= 'center'>
+    <h4>Collecting data for post number: {{post.id}}</h4>
+  </div>
+
+    <h5>Eggs were collected by: {{post.collector.username}}</h5>
+    <h6>Date of collecting: {{post.date.strftime('%d-%m-%Y')}}</h6>
+    <br>
+    <h6>Number of eggs collected: {{post.eggs_amount}}</h6>
+    <h6>Number of broken eggs collected: {{post.broken_eggs}}</h6>
+    <h6>Current food: {{post.current_food}}</h6>
+    <h6>Number of dead chickens: {{post.dead_chicken}}</h6>
+
+    {% if post.collector == current_user %}
+    <div>
+      <a href="{{url_for('egg_posts.update', egg_post_id = post.id)}}">Update</a>
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#del_post">Delete</button>
+    </div>
+    {% endif %}
+  </div>
+
+
+    <div class="modal" tabindex="-1" role="dialog" id="del_post">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Delete Post Pop up Modal</h5>
+            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete this blog post?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+
+            <form action="{{ url_for('egg_posts.delete_post', egg_post_id=post.id) }}" method="POST">
+              <input class="btn btn-danger" type="submit" value="Delete">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

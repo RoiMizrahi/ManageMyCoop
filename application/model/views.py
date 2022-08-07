@@ -12,7 +12,7 @@ model = Blueprint('machine', __name__)
 @login_required
 def predict():
     if request.method == "POST":
-        reg = joblib.load("C:/Users/roimi/Documents/מערכות מידע/שנה ג/ManageMyCoop/application/model/reg.pkl")
+        reg = joblib.load("application/model/reg.pkl")
 
         # Get values through the form
         age = request.form.get("age")

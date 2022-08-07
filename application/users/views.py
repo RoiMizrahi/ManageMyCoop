@@ -85,7 +85,7 @@ def account():
         form.phone.data = current_user.phone
         form.email.data = current_user.email
 
-    profile_image = url_for('static', filename = 'profile_pics/'+current_user.profile_image)
+    profile_image = "application/static/profile_pics/"+current_user.profile_image
     return render_template("account.html", profile_image = profile_image, form = form)
 
 #User list of collecting eggs

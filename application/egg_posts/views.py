@@ -24,7 +24,7 @@ def create_post():
                             dead_chicken = form.dead_chicken.data,
                             user_id = current_user.id)
         #header = ['date', 'eggs_amount', 'broken_eggs', 'current_food', 'dead_chicken']
-        with open('mizrahiCoop.csv', 'a', newline='') as file:
+        with open('application/egg_posts/collecting.csv', 'a', newline='') as file:
             writer = csv.writer(file)
             #writer.writerow(header)
             writer.writerow([date.today().strftime('%d-%m-%Y'), form.eggs_amount.data, form.broken_eggs.data, form.current_food.data, form.dead_chicken.data])

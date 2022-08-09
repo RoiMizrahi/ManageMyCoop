@@ -4,6 +4,7 @@ from flask_login import current_user, login_required
 from application import db
 from application.models import EggPost
 from application.egg_posts.forms import EggPostForm
+from flask import send_file
 import pandas as pd
 import csv
 from datetime import date
@@ -84,10 +85,11 @@ def delete_post(egg_post_id):
     flash('Egg_Post deleted')
     return redirect(url_for('core.index'))
 
-@egg_posts.route('/tables', methods=['GET', 'POST'])
+@egg_posts.route('/download', methods=['GET', 'POST'])
 @login_required
-
-def table():
+def download():
     # converting csv to html
-    data = pd.read_csv('mizrahiCoop.csv')
-    return render_template('table.html', tables=[data.to_html()], titles=[''])
+    filepath = 'application\egg_posts\collecting.csv'
+    hey
+    #filename = 'collecting.csv'
+    return send_file(filepath, as_attachment=True)

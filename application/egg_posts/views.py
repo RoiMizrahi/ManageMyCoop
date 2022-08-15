@@ -89,7 +89,7 @@ def delete_post(egg_post_id):
 @login_required
 def download():
     # converting csv to html
-    filepath = 'egg_posts\collecting.csv'
+    filepath = 'egg_posts/collecting.csv'
 
     #filename = 'collecting.csv'
     return send_file(filepath ,as_attachment=True)

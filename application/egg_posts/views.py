@@ -6,7 +6,6 @@ from application.models import EggPost
 from application.egg_posts.forms import EggPostForm
 from flask import send_file
 import pandas as pd
-import csv
 from datetime import date
 
 
@@ -24,11 +23,19 @@ def create_post():
                             current_food = form.current_food.data,
                             dead_chicken = form.dead_chicken.data,
                             user_id = current_user.id)
-        #header = ['date', 'eggs_amount', 'broken_eggs', 'current_food', 'dead_chicken']
-        with open('application/egg_posts/collecting.csv', 'a', newline='') as file:
-            writer = csv.writer(file)
-            #writer.writerow(header)
-            writer.writerow([date.today().strftime('%d-%m-%Y'), form.eggs_amount.data, form.broken_eggs.data, form.current_food.data, form.dead_chicken.data])
+
+        posts = pd.read_csv('application/egg_posts/collecting.csv')
+        eggs = {
+            'index':[len(posts)+1],
+            'date' :[date.today().strftime('%d-%m-%Y')],
+            'eggs_amount':[form.eggs_amount.data],
+            'broken_eggs':[form.broken_eggs.data],
+            'current_food':[form.current_food.data],
+            'dead_chicken':[form.dead_chicken.data],
+                  }
+        df = pd.DataFrame(eggs)
+        df.to_csv('application/egg_posts/collecting.csv', index=False, mode='a', header=False)
+
 
         db.session.add(egg_post)
         db.session.commit()
@@ -60,6 +67,18 @@ def update(egg_post_id):
         egg_post.dead_chicken = form.dead_chicken.data
         db.session.commit()
         flash('Post Updated')
+
+        df = pd.read_csv('application/egg_posts/collecting.csv', index_col='index')
+        df.loc[egg_post.id, 'date'] = date.today().strftime('%d-%m-%Y')
+        df.to_csv('application/egg_posts/collecting.csv')
+        df.loc[egg_post.id, 'eggs_amount'] = form.eggs_amount.data
+        df.to_csv('application/egg_posts/collecting.csv')
+        df.loc[egg_post.id, 'broken_eggs'] = form.broken_eggs.data
+        df.to_csv('application/egg_posts/collecting.csv')
+        df.loc[egg_post.id, 'current_food'] = form.current_food.data
+        df.to_csv('application/egg_posts/collecting.csv')
+        df.loc[egg_post.id, 'dead_chicken'] = form.dead_chicken.data
+        df.to_csv('application/egg_posts/collecting.csv')
         return redirect(url_for('egg_posts.egg_post', egg_post_id=egg_post.id))
     # Pass back the old blog post information so they can start again with
     # the old text and title.
@@ -68,9 +87,9 @@ def update(egg_post_id):
         form.broken_eggs.data = egg_post.broken_eggs
         form.current_food.data = egg_post.current_food
         form.dead_chicken.data = egg_post.dead_chicken
+
     return render_template('create_post.html', title='Update',
                            form=form)
-
 
 #delete
 @egg_posts.route("/<int:egg_post_id>/delete", methods=['GET', 'POST'])
@@ -83,6 +102,10 @@ def delete_post(egg_post_id):
     db.session.delete(egg_post)
     db.session.commit()
     flash('Egg_Post deleted')
+    df = pd.read_csv('application/egg_posts/collecting.csv')
+    df = df.drop(egg_post.id-1)
+    df.to_csv('application/egg_posts/collecting.csv', index=False,)
+
     return redirect(url_for('core.index'))
 
 @egg_posts.route('/download', methods=['GET', 'POST'])

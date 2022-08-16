@@ -26,7 +26,7 @@ def create_post():
 
         posts = pd.read_csv('application/egg_posts/collecting.csv')
         eggs = {
-            'index':[len(posts)+1],
+            'id':[len(posts)+1],
             'date' :[date.today().strftime('%d-%m-%Y')],
             'eggs_amount':[form.eggs_amount.data],
             'broken_eggs':[form.broken_eggs.data],
@@ -35,7 +35,6 @@ def create_post():
                   }
         df = pd.DataFrame(eggs)
         df.to_csv('application/egg_posts/collecting.csv', index=False, mode='a', header=False)
-
 
         db.session.add(egg_post)
         db.session.commit()
@@ -68,7 +67,7 @@ def update(egg_post_id):
         db.session.commit()
         flash('Post Updated')
 
-        df = pd.read_csv('application/egg_posts/collecting.csv', index_col='index')
+        df = pd.read_csv('application/egg_posts/collecting.csv', index_col='id')
         df.loc[egg_post.id, 'date'] = date.today().strftime('%d-%m-%Y')
         df.to_csv('application/egg_posts/collecting.csv')
         df.loc[egg_post.id, 'eggs_amount'] = form.eggs_amount.data
@@ -101,10 +100,12 @@ def delete_post(egg_post_id):
         abort(403)
     db.session.delete(egg_post)
     db.session.commit()
-    flash('Egg_Post deleted')
-    df = pd.read_csv('application/egg_posts/collecting.csv')
+
+    df = pd.read_csv('application/egg_posts/collecting.csv', index_col='id')
     df = df.drop(egg_post.id-1)
-    df.to_csv('application/egg_posts/collecting.csv', index=False,)
+    df.to_csv('application/egg_posts/collecting.csv')
+    flash('Egg_Post deleted')
+
 
     return redirect(url_for('core.index'))
 

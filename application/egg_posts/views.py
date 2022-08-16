@@ -102,7 +102,7 @@ def delete_post(egg_post_id):
     db.session.commit()
 
     df = pd.read_csv('application/egg_posts/collecting.csv', index_col='id')
-    df = df.drop(egg_post.id-1)
+    df = df.drop(egg_post.id)
     df.to_csv('application/egg_posts/collecting.csv')
     flash('Egg_Post deleted')
 

@@ -28,17 +28,14 @@ def create_post():
         db.session.commit()
         flash('Eggs Collected')
         posts = pd.read_csv('application/egg_posts/collecting.csv')
-        eggs = {
-            'id':[egg_post.id],
-            'date' :[date.today().strftime('%d-%m-%Y')],
-            'eggs_amount':[form.eggs_amount.data],
-            'broken_eggs':[form.broken_eggs.data],
-            'current_food':[form.current_food.data],
-            'dead_chicken':[form.dead_chicken.data],
-                  }
+        eggs = {'id':[egg_post.id],
+                'date' :[date.today().strftime('%d-%m-%Y')],
+                'eggs_amount':[form.eggs_amount.data],
+                'broken_eggs':[form.broken_eggs.data],
+                'current_food':[form.current_food.data],
+                'dead_chicken':[form.dead_chicken.data]}
         df = pd.DataFrame(eggs)
         df.to_csv('application/egg_posts/collecting.csv', index=False, mode='a', header=False)
-
         return redirect(url_for('core.index'))
     return render_template('create_post.html', form = form)
 #view

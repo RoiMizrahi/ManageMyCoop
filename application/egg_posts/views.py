@@ -24,9 +24,12 @@ def create_post():
                             dead_chicken = form.dead_chicken.data,
                             user_id = current_user.id)
 
+        db.session.add(egg_post)
+        db.session.commit()
+        flash('Eggs Collected')
         posts = pd.read_csv('application/egg_posts/collecting.csv')
         eggs = {
-            'id':[len(posts)+1],
+            'id':[egg_post.id],
             'date' :[date.today().strftime('%d-%m-%Y')],
             'eggs_amount':[form.eggs_amount.data],
             'broken_eggs':[form.broken_eggs.data],
@@ -36,9 +39,6 @@ def create_post():
         df = pd.DataFrame(eggs)
         df.to_csv('application/egg_posts/collecting.csv', index=False, mode='a', header=False)
 
-        db.session.add(egg_post)
-        db.session.commit()
-        flash('Eggs Collected')
         return redirect(url_for('core.index'))
     return render_template('create_post.html', form = form)
 #view
@@ -79,16 +79,14 @@ def update(egg_post_id):
         df.loc[egg_post.id, 'dead_chicken'] = form.dead_chicken.data
         df.to_csv('application/egg_posts/collecting.csv')
         return redirect(url_for('egg_posts.egg_post', egg_post_id=egg_post.id))
-    # Pass back the old blog post information so they can start again with
-    # the old text and title.
+    # Pass back the old egg post information so they can start again
     elif request.method == 'GET':
         form.eggs_amount.data = egg_post.eggs_amount
         form.broken_eggs.data = egg_post.broken_eggs
         form.current_food.data = egg_post.current_food
         form.dead_chicken.data = egg_post.dead_chicken
 
-    return render_template('create_post.html', title='Update',
-                           form=form)
+    return render_template('create_post.html', title='Update',form=form)
 
 #delete
 @egg_posts.route("/<int:egg_post_id>/delete", methods=['GET', 'POST'])

@@ -27,7 +27,7 @@ def create_post():
         db.session.add(egg_post)
         db.session.commit()
         flash('Eggs Collected')
-        posts = pd.read_csv('application/egg_posts/collecting.csv')
+        #posts = pd.read_csv('application/egg_posts/collecting.csv')
         eggs = {'id':[egg_post.id],
                 'date' :[date.today().strftime('%d-%m-%Y')],
                 'eggs_amount':[form.eggs_amount.data],

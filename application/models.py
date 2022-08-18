@@ -47,7 +47,7 @@ class EggPost(db.Model):
     eggs_amount = db.Column(db.Integer)
     broken_eggs = db.Column(db.Integer)
     current_food = db.Column(db.Integer)
-    dead_chicken = db.Column(db.Integer)
+    dead_chicken = db.Column(db.Integer, nullable= True)
 
     def __init__(self, user_id ,eggs_amount,broken_eggs,current_food,dead_chicken):
         self.user_id = user_id

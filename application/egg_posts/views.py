@@ -8,6 +8,7 @@ from flask import send_file
 import pandas as pd
 from datetime import date
 import plotly.express as px
+import json
 
 
 
@@ -131,5 +132,6 @@ def plotdead():
     df = pd.read_csv('application/egg_posts/collecting.csv', index_col='id')
     fig = px.line(df, x = 'date', y = 'dead_chicken', title='ploting data')
     fig.show()
-
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return redirect(url_for('core.index'))
+    return render_template('user_egg_posts.html', graphJSON=graphJSON)

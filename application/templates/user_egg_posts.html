@@ -1,39 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container">
-  <div class="jumbotron">
-    <div align= "center">
-      <h4>Welcome to the collection page for {{user.username}}</h4>
-      <img src="{{url_for('static', filename = 'profile_pics/'+user.profile_image)}}">
-    </div>
-  </div>
-
-{% for post in egg_posts.items %}
-  <h5> <a href="{{url_for('egg_posts.egg_post', egg_post_id = post.id)}}">{{post.id}}. Collected on {{post.date.strftime("%Y-%m-%d")}}</a> </h5>
-  Collected By: <a href="{{url_for('users.user_posts', username= post.collector.username)}}">{{post.collector.username}}</a>
-  <p class = 'text-muted'> Collected on: {{post.date.strftime("%Y-%m-%d")}}</p>
-    <h6>Number of eggs collected: {{post.eggs_amount}}</h6>
-    <h6>Number of broken eggs collected: {{post.broken_eggs}}</h6>
-    <h6>Current food: {{post.current_food}}</h6>
-    <h6>Number of dead chickens: {{post.dead_chicken}}</h6>
-  {% endfor %}
-</div>
-<br>
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    {% for page_num in egg_posts.iter_pages(left_edge = 1, right_edge = 1, left_current = 1, right_current = 2) %}
-      {% if egg_posts.page == page_num %}
-
-      <li class = 'page-item disabled'>
-        <a class = 'page-link' href="{{url_for('users.user_posts', username = user.username, page = page_num)}}">{{page_num}}</a>
-      </li>
-      {% else %}
-      <li class = 'page-item'>
-        <a class = 'page-link' href="{{url_for('users.user_posts', username = user.username, page = page_num)}}">{{page_num}}</a>
-      </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
-</nav>
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script type='text/javascript'>
+  var graphs = {{graphJSON | safe}};
+  Plotly.plot('chart',graphs,{});
+</script>
 
 {% endblock %}

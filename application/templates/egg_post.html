@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
+<br>
+
+<div class="card w-100">
 <div class="jumbotron">
   <div align= 'center'>
     <h4>Collecting data for post number: {{post.id}}</h4>
@@ -15,7 +18,7 @@
 
     {% if post.collector == current_user %}
     <div>
-      <a href="{{url_for('egg_posts.update', egg_post_id = post.id)}}">Update</a>
+      <a class="btn btn-warning" href="{{url_for('egg_posts.update', egg_post_id = post.id)}}">Update</a>
       <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#del_post">Delete</button>
     </div>
     {% endif %}
@@ -44,5 +47,6 @@
         </div>
       </div>
     </div>
+  </div>
 
 {% endblock %}

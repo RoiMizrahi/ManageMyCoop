@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+<br>
+<div class="mx-auto" style="width: 500px;">
+
+<div class="card w-100">
 <div class="jumbotron">
   <div align= 'center'>
     <h1>Collect Eggs</h1>
@@ -25,10 +29,13 @@
     {{form.dead_chicken.label(class="form-group")}}
     {{form.dead_chicken(class="form-control")}}
     </div>
-
+    <br>
     <div class="form-group">
-    {{form.submit(class = 'btn btn-primary')}}
+    {{form.submit(class = 'btn btn-success')}}
     </div>
 </form>
 </div>
+</div>
+</div>
+
 {% endblock %}

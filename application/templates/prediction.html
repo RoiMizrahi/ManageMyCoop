@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+<br>
+<div class="mx-auto" style="width: 500px;">
 <div class="card" style="width: 40rem;">
   <div class="card-body">
         <div class="signup-heading" align="center">
           <h1 class="font-weight-normal">Prediction Page</h1>
-          <h3>Predict amount of eggs</h3>
         </div>
-        <br>
         <h3> Enter the following values:</h3>
           <form method="POST" action= "" enctype="multipart/form-data">
             <div class="form-group">
@@ -21,12 +21,14 @@
             <div class="form-group">
             Number of Dead Chickens: <input class="form-control" type="number" name="dead", placeholder="Enter amount of dead chickens" required/>
             </div>
+            <p></p>
             <div class="form-group">
-              <button class = 'btn btn-primary' value="Submit">Predict</button>
+              <button class = 'btn btn-success' value="Submit">Predict</button>
             </div>
             </form>
             <p style="text-align: center;">{{ output }}</p>
     </div>
+  </div>
 </div>
 
 {% endblock %}

@@ -75,7 +75,7 @@ def update(egg_post_id):
         df.to_csv('application/egg_posts/collecting.csv')
         df.loc[egg_post.id, 'dead_chicken'] = form.dead_chicken.data
         df.to_csv('application/egg_posts/collecting.csv')
-        return redirect(url_for('egg_posts.egg_post', egg_post_id=egg_post.id))
+        return redirect(url_for('core.index'))
     # Pass back the old egg post information so they can start again
     elif request.method == 'GET':
         form.eggs_amount.data = egg_post.eggs_amount

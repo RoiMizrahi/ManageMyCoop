@@ -1,17 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+<br>
+<div class="card w-100">
 <div class="cform-floating mb-3">
   <div class="row">
     <div class="col-12">
       <div class="enter-div" align="center">
-          <h1><small class="text-muted">Welcome to</small> Manage My Coop {{current_user.username}}</h1>
-
+          <h1><small class="text-muted">Welcome to</small> Manage My Coop {{current_user.last_name}} {{current_user.first_name}}</h1>
       </div>
       <div class="row">
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Our Technology</h5>
+        <h4 class="card-title">Our Technology</h5>
         <p class="card-text">Our technology includes algorithms that work through business intelligence.</p>
         <p>The system is simple to implement and use and includes an intuitive report display.</p>
         <p>The system is easy to operate and suitable for all ages</p>
@@ -21,7 +22,7 @@
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">Easy to use</h5>
+        <h4 class="card-title">Easy to use</h5>
         <p class="card-text">The system's easy-to-use technology allows farmers to manage every aspect of their chicken coop.</p>
         <p>The system gives the farmer the ability to make informed decisions</p>
       </div>
@@ -32,8 +33,8 @@
 <div class="d-flex position-relative">
   <img src="{{ url_for('static', filename='images/ceo.png') }}" class="flex-shrink-0 me-3" height="200" width="200" >
   <div>
-    <h5 class="mt-0">Mizrahi Roi <small class="text-muted">CEO</small></h5>
-    <p></p>
+    <h3 class="mt-0">Mizrahi Roi <small class="text-muted">CEO</small></h5>
+    <br>
     <p>Not only has ManageMyCoop's technology created significant savings in production costs,
        it also improves coop performance and productivity.
       It's a must-have product for every coop in the industry.</p>
@@ -122,6 +123,8 @@
   </form>
   </div>
 </div>
+</div>
+
 {% endif %}
 
 {% endblock %}

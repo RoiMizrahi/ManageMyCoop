@@ -121,7 +121,7 @@ def download():
 @login_required
 def ploteggs():
     df = pd.read_csv('application/egg_posts/collecting.csv', index_col='id')
-    fig = px.line(df, x = 'date', y = 'eggs_amount', title='ploting data')
+    fig = px.line(df, x = 'date', y = 'eggs_amount', labels={'date': 'Date', 'eggs_amount': 'Eggs Amount'})
     #fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template('eggs_plot.html', graphJSON=graphJSON)
@@ -131,7 +131,7 @@ def ploteggs():
 @login_required
 def plotdead():
     df = pd.read_csv('application/egg_posts/collecting.csv', index_col='id')
-    fig = px.line(df, x = 'date', y = 'dead_chicken')
+    fig = px.line(df, x = 'date', y = 'dead_chicken', labels={'date': 'Date', 'dead_chicken': 'Dead Chickens Amount'})
     #fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template('dead_plot.html', graphJSON=graphJSON)

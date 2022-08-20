@@ -7,6 +7,7 @@ from application.egg_posts.forms import EggPostForm
 from flask import send_file
 import pandas as pd
 from datetime import date
+import plotly.express as px
 
 
 
@@ -112,3 +113,23 @@ def download():
 
     #filename = 'collecting.csv'
     return send_file(filepath ,as_attachment=True)
+
+#plots
+@egg_posts.route("/ploteggs", methods=['GET', 'POST'])
+@login_required
+def ploteggs():
+    df = pd.read_csv('application/egg_posts/collecting.csv', index_col='id')
+    fig = px.line(df, x = 'date', y = 'eggs_amount', title='ploting data')
+    fig.show()
+
+    return redirect(url_for('core.index'))
+
+#delete
+@egg_posts.route("/plotdead", methods=['GET', 'POST'])
+@login_required
+def plotdead():
+    df = pd.read_csv('application/egg_posts/collecting.csv', index_col='id')
+    fig = px.line(df, x = 'date', y = 'dead_chicken', title='ploting data')
+    fig.show()
+
+    return redirect(url_for('core.index'))

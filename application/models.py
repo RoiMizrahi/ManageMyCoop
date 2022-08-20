@@ -44,9 +44,9 @@ class EggPost(db.Model):
     id = db.Column(db.Integer , primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'),nullable=False)
     date = db.Column(db.DateTime,nullable=False, default=datetime.utcnow)
-    eggs_amount = db.Column(db.Integer)
-    broken_eggs = db.Column(db.Integer)
-    current_food = db.Column(db.Integer)
+    eggs_amount = db.Column(db.Integer, nullable= True)
+    broken_eggs = db.Column(db.Integer, nullable= True)
+    current_food = db.Column(db.Integer, nullable= True)
     dead_chicken = db.Column(db.Integer, nullable= True)
 
     def __init__(self, user_id ,eggs_amount,broken_eggs,current_food,dead_chicken):

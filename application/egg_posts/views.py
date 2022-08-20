@@ -122,17 +122,16 @@ def download():
 def ploteggs():
     df = pd.read_csv('application/egg_posts/collecting.csv', index_col='id')
     fig = px.line(df, x = 'date', y = 'eggs_amount', title='ploting data')
-    fig.show()
-
-    return redirect(url_for('core.index'))
+    #fig.show()
+    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    return render_template('eggs_plot.html', graphJSON=graphJSON)
 
 #delete
 @egg_posts.route("/plotdead", methods=['GET', 'POST'])
 @login_required
 def plotdead():
     df = pd.read_csv('application/egg_posts/collecting.csv', index_col='id')
-    fig = px.line(df, x = 'date', y = 'dead_chicken', title='ploting data')
-    fig.show()
+    fig = px.line(df, x = 'date', y = 'dead_chicken')
+    #fig.show()
     graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    return redirect(url_for('core.index'))
-    return render_template('user_egg_posts.html', graphJSON=graphJSON)
+    return render_template('dead_plot.html', graphJSON=graphJSON)

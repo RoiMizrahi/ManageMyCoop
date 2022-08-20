@@ -7,6 +7,7 @@ from application.egg_posts.forms import EggPostForm
 from flask import send_file
 import pandas as pd
 from datetime import date
+import plotly
 import plotly.express as px
 import json
 

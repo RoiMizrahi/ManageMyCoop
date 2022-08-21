@@ -63,8 +63,8 @@ IQR = Q3 - Q1
 print(IQR)
 upper_limit= Q3 + (1.5*IQR)
 lower_limit= Q1 - (1.5*IQR)
-df['Eggs'] = np.where(df['Eggs'] <lower_limit ,lower_limit,df['Eggs'])
-df['Eggs'] = np.where(df['Eggs'] > upper_limit,upper_limit,df['Eggs'])
+#df['Eggs'] = np.where(df['Eggs'] <lower_limit ,lower_limit,df['Eggs'])
+#df['Eggs'] = np.where(df['Eggs'] > upper_limit,upper_limit,df['Eggs'])
 
 plt.figure(figsize=(9,6))
 boxplot = df.boxplot(column='Eggs',grid=False, rot=45, fontsize=15)  #much better :)
@@ -85,7 +85,7 @@ df.drop(['date'], axis=1, inplace=True) #the regressor doesn't know how to handl
 
 #realized that dropping temp and humid made the algorithem even better
 #food consumed is just like current food
-df.drop(['Temp','Humidity','Food', 'Broken'], axis=1 , inplace=True)
+df.drop(['Temp','Humidity','Food','Broken'], axis=1 , inplace=True)
 print(df.head())
 
 #preparing the data

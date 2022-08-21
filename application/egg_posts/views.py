@@ -32,7 +32,7 @@ def create_post():
         flash('Eggs Collected')
         #posts = pd.read_csv('application/egg_posts/collecting.csv')
         eggs = {'id':[egg_post.id],
-                'date' :[date.today().strftime('%d-%m-%Y')],
+                'date' :[date.today().strftime('%d/%m/%Y')],
                 'eggs_amount':[form.eggs_amount.data],
                 'broken_eggs':[form.broken_eggs.data],
                 'current_food':[form.current_food.data],

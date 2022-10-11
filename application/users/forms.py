@@ -8,33 +8,33 @@ from flask_login import current_user
 from application.models import User
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
-    submit = SubmitField('Log In')
+    email = StringField('אימייל', validators=[DataRequired(), Email()])
+    password = PasswordField('סיסמא', validators=[DataRequired()])
+    submit = SubmitField('התחברות')
 
 class RegistationForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    username = StringField('UserName', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), EqualTo('pass_confirm', message='Passwords Must Match!')])
-    pass_confirm = PasswordField('Confirm Password', validators=[DataRequired()])
-    first_name = StringField('First Name', validators=[DataRequired()])
-    last_name = StringField('Last Name', validators=[DataRequired()])
-    phone = StringField('Phone Number', validators=[DataRequired()])
-    submit = SubmitField("Register")
+    email = StringField('אימייל', validators=[DataRequired(), Email()])
+    username = StringField('שם משתמש', validators=[DataRequired()])
+    password = PasswordField('סיסמא', validators=[DataRequired(), EqualTo('pass_confirm', message='Passwords Must Match!')])
+    pass_confirm = PasswordField('אימות סיסמא', validators=[DataRequired()])
+    first_name = StringField('שם פרטי', validators=[DataRequired()])
+    last_name = StringField('שם משפחה', validators=[DataRequired()])
+    phone = StringField('מספר פלאפון', validators=[DataRequired()])
+    submit = SubmitField("הרשמה")
 
     def check_email(self, field):
         if User.query.filter_by(email=filed.data).first():
-            raise ValidationError('Your email has been registered allready!')
+            raise ValidationError('מישהו אחר כבר נרשם עם האימייל שלך')
 
     def check_username(self, field):
         if User.query.filter_by(username=filed.data).first():
-            raise ValidationError('Your username has been registered allready!')
+            raise ValidationError('מישהו אחר כבר נרשם עם שם משתמש זה')
 
 class UpdateUserForm(FlaskForm):
-    first_name = StringField('First Name', validators=[DataRequired()])
-    last_name = StringField('Last Name', validators=[DataRequired()])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    phone = StringField('Phone Number', validators=[DataRequired()])
-    username = StringField('Username', validators=[DataRequired()])
-    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg','png','jpeg','gif'])])
-    submit = SubmitField("Update")
+    first_name = StringField('שם פרטי', validators=[DataRequired()])
+    last_name = StringField('שם משפחה', validators=[DataRequired()])
+    email = StringField('אימייל', validators=[DataRequired(), Email()])
+    phone = StringField('מספר פלאפון', validators=[DataRequired()])
+    username = StringField('שם משתמש', validators=[DataRequired()])
+    picture = FileField('עדכן תמונת פרופיל', validators=[FileAllowed(['jpg','png','jpeg','gif'])])
+    submit = SubmitField("עדכון")

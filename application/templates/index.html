@@ -11,14 +11,14 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Date</th>
-        <th scope="col">Collected by</th>
-        <th scope="col">Num of eggs</th>
-        <th scope="col">Num of broken eggs</th>
-        <th scope="col">Current food</th>
-        <th scope="col">Num of dead chickens</th>
-        <th scope="col">update</th>
-        <th scope="col">Delete</th>
+        <th scope="col">תאריך</th>
+        <th scope="col">נאסף על ידי</th>
+        <th scope="col">ביצים שלמות</th>
+        <th scope="col">ביצים שבורות</th>
+        <th scope="col">אוכל עדכני</th>
+        <th scope="col">כמות מתות</th>
+        <th scope="col">עדכון</th>
+        <th scope="col">מחיקה</th>
       </tr>
     </thead>
     <tbody>
@@ -31,16 +31,16 @@
           <td>{{ post.broken_eggs }}</td>
           <td>{{ post.current_food }}</td>
           <td>{{ post.dead_chicken }}</td>
-          <td>{% if post.collector == current_user %} <a  class="btn btn-warning" href="{{url_for('egg_posts.update', egg_post_id = post.id)}}">Update</a>{% endif %}</td>
-          <td>{% if post.collector == current_user %} <a class="btn btn-danger" href="{{url_for('egg_posts.egg_post' , egg_post_id=post.id)}}">Delete</a>{% endif %} </td>
+          <td>{% if post.collector == current_user %} <a  class="btn btn-warning" href="{{url_for('egg_posts.update', egg_post_id = post.id)}}">עדכון</a>{% endif %}</td>
+          <td>{% if post.collector == current_user %} <a class="btn btn-danger" href="{{url_for('egg_posts.egg_post' , egg_post_id=post.id)}}">מחיקה</a>{% endif %} </td>
         </tr>
       {% endfor %}
     </tbody>
 </table>
 </div>
 
-<a class="btn btn-success" href="{{url_for('egg_posts.download')}}">Download</a>
-<a class="btn btn-info" href="{{url_for('egg_posts.ploteggs')}}">Plot eggs</a>
-<a class="btn btn-secondary" href="{{url_for('egg_posts.plotdead')}}">Plot dead</a>
+<a class="btn btn-success" href="{{url_for('egg_posts.download')}}">הורדה</a>
+<a class="btn btn-info" href="{{url_for('egg_posts.ploteggs')}}">גרף ביצים</a>
+<a class="btn btn-secondary" href="{{url_for('egg_posts.plotdead')}}">גרף מתות</a>
 
 {% endblock %}

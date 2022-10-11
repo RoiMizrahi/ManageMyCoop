@@ -5,25 +5,25 @@
 <div class="card" style="width: 40rem;">
   <div class="card-body">
         <div class="signup-heading" align="center">
-          <h1 class="font-weight-normal">Prediction Page</h1>
+          <h1 class="font-weight-normal">עמוד החיזוי</h1>
         </div>
-        <h3> Enter the following values:</h3>
+        <h3> הכנס את הנתונים הבאים:</h3>
           <form method="POST" action= "" enctype="multipart/form-data">
             <div class="form-group">
-            Age(in days): <input class="form-control" type="number" name="age", placeholder="Enter age (in days) of chickens" required/>
+            גיל בימים: <input class="form-control" type="number" name="age", placeholder="הגיל בימים של התרנגולות" required/>
             </div>
             <div class="form-group">
-            Food amount: <input class="form-control" type="number" name="food_consumed", placeholder="Enter amount of food consumed" required/>
+            כמות אוכל: <input class="form-control" type="number" name="food_consumed", placeholder="הכנס כמות של אוכל שאכלו!" required/>
             </div>
             <div class="form-group">
-            Number of Chickens: <input class="form-control" type="number" name="num_of_chickiens", placeholder="Enter amount of chickens" required/>
+            כמות תרנגולות: <input class="form-control" type="number" name="num_of_chickiens", placeholder="הכנס את כמות התרנגולות" required/>
             </div>
             <div class="form-group">
-            Number of Dead Chickens: <input class="form-control" type="number" name="dead", placeholder="Enter amount of dead chickens" required/>
+            כמות תרגנולות מתות: <input class="form-control" type="number" name="dead", placeholder="הכנס כמות תרנגולות מתות" required/>
             </div>
             <p></p>
             <div class="form-group">
-              <button class = 'btn btn-success' value="Submit">Predict</button>
+              <button class = 'btn btn-success' value="Submit">חיזוי</button>
             </div>
             </form>
             <p style="text-align: center;">{{ output }}</p>
